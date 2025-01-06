@@ -1,0 +1,219 @@
+import java.util.Scanner;
+
+public class BMICalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt the user to enter weight and height
+        System.out.print("Enter weight in KG: ");
+        double weight = scanner.nextDouble();
+
+        System.out.print("Enter height in cm: ");
+        double heightCm = scanner.nextDouble();
+
+        // Convert height from cm to meters
+        double heightMeters = heightCm / 100;
+
+        // Calculate BMI
+        double bmi = weight / (heightMeters * heightMeters);
+
+        // Display the BMI value
+        System.out.printf("BMI = %.2f%n", bmi);
+
+        // Interpret and display BMI category
+        if (bmi < 18.5) {
+            System.out.println("Underweight!");
+        } else if (bmi >= 18.5 && bmi <= 24.9) {
+            System.out.println("Normal!");
+        } else if (bmi >= 25 && bmi <= 29.9) {
+            System.out.println("Overweight!");
+        } else {
+            System.out.println("Obese!");
+        }
+
+        // Close the scanner
+        scanner.close();
+    }
+}
+
+
+
+public class TuitionFeeCalculator {
+    public static void main(String[] args) {
+        // Initial tuition fee
+        double tuition = 50000;
+        double annualIncrease = 0.05 * 50000; // 5% of the initial fee
+
+        // Calculate and display the tuition for 10 consecutive years
+        for (int year = 1; year <= 10; year++) {
+            tuition += annualIncrease; // Apply the 5% increase at the start of each year
+            System.out.printf("The fee after %d year = %.1f%n", year, tuition);
+        }
+    }
+}
+
+
+
+import java.util.Scanner;
+
+public class FuelEconomyCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input the initial distance and fuel consumption
+        System.out.print("Enter the distance (in Km): ");
+        double distance = scanner.nextDouble();
+        System.out.print("Enter the fuel consumed (in Litre): ");
+        double fuel = scanner.nextDouble();
+
+        // Calculate the average fuel economy
+        double fuelEconomy = distance / fuel;
+        System.out.printf("Average fuel economy = %.1f kmpl%n", fuelEconomy);
+
+        int choice;
+        do {
+            // Display menu
+            System.out.println("1. Dist estimation.");
+            System.out.println("2. Fuel estimation.");
+            System.out.print("Enter your choice (0 to stop): ");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    // Distance estimation
+                    System.out.print("Enter the fuel consumed (in Litre): ");
+                    double fuelInput = scanner.nextDouble();
+                    double estimatedDistance = fuelEconomy * fuelInput;
+                    System.out.printf("Estimated distance = %.1f km%n", estimatedDistance);
+                    break;
+
+                case 2:
+                    // Fuel estimation
+                    System.out.print("Enter the distance (in Km): ");
+                    double distanceInput = scanner.nextDouble();
+                    double estimatedFuel = distanceInput / fuelEconomy;
+                    System.out.printf("Estimated fuel = %.6f Litre%n", estimatedFuel);
+                    break;
+
+                case 0:
+                    System.out.println("Exiting the program...");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != 0);
+
+        scanner.close();
+    }
+}
+
+
+
+import java.util.Scanner;
+
+public class GrossPayCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input: Number of hours worked and hourly rate
+        System.out.print("Enter the number of hours worked: ");
+        double hoursWorked = scanner.nextDouble();
+
+        System.out.print("Enter the hourly rate: ");
+        double hourlyRate = scanner.nextDouble();
+
+        double totalPay;
+
+        // Calculate total pay based on the given criteria
+        if (hoursWorked <= 40) {
+            totalPay = hoursWorked * hourlyRate; // Straight time for 40 hours or less
+        } else {
+            double overtimeHours = hoursWorked - 40;
+            totalPay = (40 * hourlyRate) + (overtimeHours * hourlyRate * 1.5); // Overtime pay for hours > 40
+        }
+
+        // Output: Display the total pay
+        System.out.printf("The total pay = %.1f%n", totalPay);
+
+        scanner.close();
+    }
+}
+
+
+import java.util.Scanner;
+
+public class LoanCalculator {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        // Get loan amount and loan period from user
+        System.out.print("Enter loan amount: ");
+        double loanAmount = input.nextDouble();
+
+        System.out.print("Enter number of years: ");
+        int numberOfYears = input.nextInt();
+
+        // Display table header
+        System.out.printf("%-15s%-20s%-20s\n", "Interest Rate (%)", "Monthly Payment", "Total Payment");
+
+        // Loop through interest rates from 5% to 8% with 1/8 (0.125%) increment
+        for (double annualInterestRate = 5.0; annualInterestRate <= 8.0; annualInterestRate += 0.125) {
+            // Calculate monthly interest rate
+            double monthlyInterestRate = annualInterestRate / 100 / 12;
+
+            // Calculate monthly payment using the formula
+            double monthlyPayment = (loanAmount * monthlyInterestRate) /
+                    (1 - 1 / Math.pow(1 + monthlyInterestRate, numberOfYears * 12));
+
+            // Calculate total payment
+            double totalPayment = monthlyPayment * numberOfYears * 12;
+
+            // Display results
+            System.out.printf("%-15.3f%-20.2f%-20.2f\n", annualInterestRate, monthlyPayment, totalPayment);
+        }
+
+        input.close();
+    }
+}
+
+
+
+
+import java.util.Scanner;
+
+public class QuadraticEquation {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt the user to enter coefficients a, b, and c
+        System.out.print("Enter coefficient a: ");
+        double a = scanner.nextDouble();
+
+        System.out.print("Enter coefficient b: ");
+        double b = scanner.nextDouble();
+
+        System.out.print("Enter coefficient c: ");
+        double c = scanner.nextDouble();
+
+        // Calculate the discriminant
+        double discriminant = b * b - 4 * a * c;
+
+        // Determine the nature of the roots based on the discriminant
+        if (discriminant > 0) {
+            // Two real roots
+            double root1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+            double root2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+            System.out.printf("Two roots: %.6f and %.6f\n", root1, root2);
+        } else if (discriminant == 0) {
+            // One real root
+            double root = -b / (2 * a);
+            System.out.printf("Only one root: %.6f\n", root);
+        } else {
+            // No real roots
+            System.out.println("Roots are imaginary");
+        }
+
+        scanner.close();
+    }
+}
